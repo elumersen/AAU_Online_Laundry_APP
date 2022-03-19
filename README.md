@@ -7,7 +7,7 @@ Zeamanual feleke   UGR/8657/12
 Zenamarkos Molla   UGR/4176/12
 
 
-AAU_Online_Laundry_System_App
+#AAU_Online_Laundry_System_App
 The AAU laundry system app is the system we aimed to create. Most universities in developed countries provide laundry services to their students, and our university has a laundry facility, but it is not modern and does not correspond to a first generation university. This laundry differs from others in that it only serves AAU students and charges a very low service fee. Students used to face numerous challenges when it came to washing their clothes, and they wasted a significant amount of time while waiting for it to dry. Furthermore, they frequently lost their clothes and had them stolen. The environment was also unsuitable for students with disabilities. For authentication, our system uses the student's ID and provides the service to each student by reaching into their dorms. The delivery service, as opposed to the laundry itself, will be free of charge.
 
 
