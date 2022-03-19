@@ -1,4 +1,4 @@
-# AAU_Online_Laundry_Mob_APP
+# AAU_Laundry_Mob_APP
 
 Gemechis Urgessa   UGR/7128/12
 Getnet Adugna      UGR/3381/12
