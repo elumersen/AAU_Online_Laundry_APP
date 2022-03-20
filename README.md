@@ -18,26 +18,3 @@ For the authentication, the users(students) are requested to sign up for an acco
 
 For the authorization, whenever a new account is created, a corresponding role will be attached to it. For our mobile app there will be three  authorization levels, first one is for non-registered users, the second one is for registered students and the third one is for admins.
 
-          Description :
-           
-The authentication will be done based on the Student ID and email that is stored on the school database. 
-
-The system will provide a list of cloth categories that are supported by the organization for wash. 
-
-The user can select the type of cloth they want to get washed and select the quantity of the cloth item, then they will immediately be notified the total price amount they would pay. 
-
-The system will allow certain features based on access control. The system will show the admin how many users have signed up, how much income has generated, how many closes are currently ordered for wash, finished laundry process, waiting for delivery using categories. 
-
- The user can create account by signing up,  login, change/ update their profile and also delete their account.
-
-The system will provide update options for the system admin related to change of the laundry cost of any cloth items or any other changes, provide a dashboard for assigning, revoking, managing permissions. 
-
-The system will allow the laundry personnel to set or update wash status, delivery status and payment status of any order. 
-
-The system will provide notification for the users when their laundry is done. 
-
-The App will allow sign up of new users to the laundry system Users signing up for the app will be verified to ensure that they are student of the University(depending on the database used it can be for other universities or institutions also). 
-
-The users can provide comments and suggestions. 
-
-The admin has a  full credentials to create, update and delete data from the database.
