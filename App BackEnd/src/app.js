@@ -1,11 +1,12 @@
 require('dotenv').config()
-reuuire("dotenv").configure()
 let express = require('express')
+let conncet =require('./config/db')
+let userRoute = require('./routes/user')
+let errorHandler= require('./middlewares/errorHandler')
+
 
 let app = express()
-
+conncet(app)
 app.use(express.json())
-
-
-app.listen(process.env.port)
-
+app.use('/user',userRoute)
+app.use(errorHandler)
