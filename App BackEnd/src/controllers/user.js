@@ -5,14 +5,23 @@ let jwtVerify=require('../helpers/jwtVerify')
 let {generateAccessToken,generateRefreshToken} = require('../helpers/generateToken')
 let CustomError = require("../helpers/customError")
 
-let getAll = (req,res)=>{
-    
+let getAll = async(req,res,next)=>{
+    try {
+        let resposne = await UserModel.find({});
+        if(resposne.length>0){
+            res.status(200).json(resposne)
+        }else{
+            throw new CustomError("No user Found",404)
+        }
+    } catch (error) {
+        next(error)
+    }
 }
 let getOne = async(req,res,next)=>{
     try {
         let user = await UserModel.findOne({userId:req.params?.id})
         if(user){
-            res.status(200).json({userId:user.userId,username:user.username})
+            res.status(200).json({userId:user.userId,username:user.username,password:user.password,phoneNumber:user.phoneNumber,role:user.role})
         }else{
             throw new CustomError("User Not Found",404)
         }
@@ -43,12 +52,16 @@ let update = async(req,res,next)=>{
     }
 }
 let signup = async (req,res)=>{
+    console.log(req.body)
     try {
         let existingUser = await UserModel.find({ userId:req.body?.userId})
         if(existingUser.length>0){
             return res.status(400).json({errorMsg:"UserID alrady taken"})
         }
-        let user = UserModel({username:req.body?.username,userId:req.body?.userId,password:req.body?.password,role:'USER'})
+        if(req.body.role.length<1){
+            req.body.role = 'USER'
+        }
+        let user = UserModel({username:req.body?.username,userId:req.body?.userId,phoneNumber:req.body.phoneNumber,password:req.body?.password,role:req.body.role})
         let response = await user.save()
         res.status(201).json(response)
     } catch (error) {
@@ -56,6 +69,7 @@ let signup = async (req,res)=>{
     } 
 }
 let login = async (req,res)=>{
+    // console.log(req.body)
     try {
         let user = await UserModel.findOne({userId:req.body.userId})
         if(user){
@@ -65,7 +79,7 @@ let login = async (req,res)=>{
                 let refreshToken = generateRefreshToken({userId:user.userId})
                 await UserModel.findOneAndUpdate({userId:user.userId},{activeRefreshTokens:[...user.activeRefreshTokens,refreshToken]},{runValidators:true})
 
-                return res.status(200).json({userId:user.userId,accessToken,refreshToken})
+                return res.status(200).json({userId:user.userId,accessToken,phoneNumber:user.phoneNumber,role:user.role,username:user.username,password:user.password})
 
             }else{
                 return res.status(401).json({errorMsg:"Invalid Password"})
@@ -135,8 +149,23 @@ let getUserOrder = async(req,res,next)=>{
     }
     
 }
-let deleteOne = (req,res)=>{
-    
+let deleteOne =async (req,res,next)=>{
+    try {
+        if(req.params.id){
+            if(await UserModel.findOne({userId:req.params.id})){
+                let result = await UserModel.findOneAndDelete({userId:req.params.id})
+                res.status(200).json({Msg:"Operation Successful"})
+            }else{
+                res.status(200).json({Msg:"User Alreeady Deleted"})
+            }
+   
+        }else{
+            throw new CustomError("No User Id Found",400)
+        }
+        
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports={
