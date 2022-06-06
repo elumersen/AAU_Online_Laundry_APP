@@ -1,26 +1,15 @@
-class User {
-  final String username;
-  final String userID;
-  final String password;
-  final String role;
-  final String phoneNumber;
-  final List myUser;
+class User{
+  String userId;
+  String username;
+  String phoneNumber;
+  String password;
+  String role;
 
-  const User(
-      {required this.username,
-      required this.userID,
-      required this.password,
-      required this.role,
-      required this.phoneNumber,
-      required this.myUser});
+  User({required this.userId,required this.username, required this.phoneNumber,required this.password, required this.role});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-        username: json['username'],
-        userID: json['userID'],
-        password: json['password'],
-        role: json['role'],
-        phoneNumber: json['phoneNumber'],
-        myUser: json['myUser']);
+  factory User.fromJson(jsonData){
+    return User(userId: jsonData["userId"], username: jsonData["username"], phoneNumber: jsonData["phoneNumber"], password: jsonData["password"], role: jsonData["role"]);
   }
+
+
 }
