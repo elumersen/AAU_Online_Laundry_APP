@@ -1,8 +1,12 @@
+import 'package:aau_laundary_app/blocs/adminBloc/admin_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: use_key_in_widget_constructors
 class Total extends StatelessWidget {
   // const total({Key? key}) : super(key: key);
+  AdminDataLoaded data;
+  Total({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +21,14 @@ class Total extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(30, 10, 20, 100),
                 child: Container(
                   padding: EdgeInsets.all(10),
-                  height: 60,
+                  // height: 60,
                   width: 150,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text("Total users"), Text("4")],
+                        children: [Text("Total users"), Text("${data.totalUsers}")],
                       ),
                       Icon(Icons.people)
                     ],
@@ -46,50 +50,58 @@ class Total extends StatelessWidget {
                       children: [
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("TotalOrders"), Text("9")],
+                          children: [Text("TotalOrders"), Text("${data.totatlOrders}")],
                         ),
                         Icon(Icons.list)
                       ],
                     ),
-                  ))
+                  )
+                  )
             ],
           ),
-          Card(
-            color: Color.fromARGB(255, 248, 246, 246),
-            child: Container(
-              padding: EdgeInsets.all(10),
-              height: 60,
-              width: 70,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+               Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text("Total Earning"), Text("124")],
+                  Card(
+                    color: Color.fromARGB(255, 248, 246, 246),
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text("Total Earning"), Text("${data.totalEarning}")],
+                      ),
+                    ),
                   ),
-                  Icon(Icons.message)
+                  // Icon(Icons.message)
                 ],
               ),
             ),
+            ]
           ),
           SizedBox(
             height: 13,
           ),
           DataTable(
             columns: [
-              DataColumn(label: Text("")),
-              DataColumn(label: Text("Student id")),
               DataColumn(label: Text("payment amount")),
               DataColumn(label: Text("cloth amount"))
             ],
-            rows: [
-              DataRow(cells: [
-                DataCell(Text("12")),
-                DataCell(Text("12")),
-                DataCell(Text("12")),
-                DataCell(Text("12"))
-              ]),
-            ],
+            rows:
+              data.orders.map((order){
+                return  DataRow(
+                cells: 
+                [
+                DataCell(Text("${order.price} ETB")),
+                DataCell(Text("${order.clothes.length}")),
+                //  DataCell(Text("99")),
+              ]
+              );
+              }).toList(),
           )
         ],
       ),
