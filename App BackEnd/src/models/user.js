@@ -19,6 +19,11 @@ let userSchema = mongoose.Schema({
         minLength:8,
         maxLength:20
     },
+    phoneNumber:{
+        type:String,
+        required:[true,"phone number missing"],
+        unique:[true,"phone number alrady exists"]
+    },
     role:{
         type:String,
         enum:['USER','ADMIN'],

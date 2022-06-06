@@ -41,7 +41,7 @@ let update = async(req,res,next)=>{
                 let cloth = await ClothModel.findOne({name:clothes[i].name})
                 totalPrice+=(cloth.price*clothes[i].quantity)
             }
-            let newOrder = await OrderModel.findOneAndReplace({_id:req.params.id},{userId:req.userId,clothes,price:totalPrice})
+            let newOrder = await OrderModel.findOneAndReplace({_id:req.params.id},{userId:req.userId,clothes,price:totalPrice},{runValidators:true,new:true})
             res.status(200).json(newOrder)
         }else{
             throw new CustomError("Invalid input",400)
@@ -53,6 +53,7 @@ let update = async(req,res,next)=>{
     
 }
 let create = async (req,res,next)=>{
+    console.log(req.body)
     try {
         let totalPrice = 0
         if(req.body?.clothes){
@@ -70,7 +71,7 @@ let create = async (req,res,next)=>{
         next(error)
     }
 }
-let deleteOne = async(req,res)=>{
+let deleteOne = async(req,res,next)=>{
     try {
         if(req.params?.id){
             let deleted = await OrderModel.findOneAndDelete({_id:req.params.id})
