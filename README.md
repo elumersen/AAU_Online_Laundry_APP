@@ -1,10 +1,6 @@
 # AAU_Laundry_System_APP
 
-Gemechis Urgessa   UGR/7128/12
-Getnet Adugna      UGR/3381/12
-Melat ermiyas      UGR/8994/12
-Zeamanual feleke   UGR/8657/12 
-Zenamarkos Molla   UGR/4176/12
+
 
 
             AAU_Laundry_System_App:
